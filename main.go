@@ -8,6 +8,12 @@ import (
 	"net/http"
 )
 
+/* Assignment 3
+   B class
+   GLN038MNC007
+   barru.kurniawan@gmail.com
+   Barru Kurniawan */
+
 func main() {
 	go services.UpdateWeather()
 	http.HandleFunc("/", dataCuaca)
