@@ -10,11 +10,11 @@ import (
 
 func main() {
 	go services.UpdateWeather()
-	http.HandleFunc("/", getWeather)
+	http.HandleFunc("/", dataCuaca)
 	http.ListenAndServe(":9000", nil)
 }
 
-func getWeather(w http.ResponseWriter, r *http.Request) {
+func dataCuaca(w http.ResponseWriter, r *http.Request) {
 	dataWeather, err := ioutil.ReadFile("data.json")
 	if err != nil {
 		writeJsonResponse(w, http.StatusNotFound, map[string]interface{}{
@@ -35,6 +35,7 @@ func getWeather(w http.ResponseWriter, r *http.Request) {
 	var statusWater string
 	var statusWind string
 
+	//check water level
 	if water <= 5 {
 		statusWater = "Aman"
 	} else if water >= 6 && water <= 8 {
@@ -43,6 +44,7 @@ func getWeather(w http.ResponseWriter, r *http.Request) {
 		statusWater = "Bahaya"
 	}
 
+	//check wind level
 	if wind <= 6 {
 		statusWind = "Aman"
 	} else if wind >= 7 && wind <= 15 {

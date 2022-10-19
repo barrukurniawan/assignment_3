@@ -1,1 +1,7 @@
-{"Status":{"Water":68,"Wind":30}}
+{
+    "Status":
+        {
+            "Water":3,
+            "Wind":8
+        }
+}
