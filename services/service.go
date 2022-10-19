@@ -18,17 +18,16 @@ type Weather struct {
 }
 
 type ResultWeather struct {
-	Water       int
-	Wind        int
-	StatusWater string
-	StatusWind  string
+	Water        int
+	Wind         int
+	status_water string
+	status_wind  string
 }
 
 func UpdateWeather() {
 	max := 100
 	min := 1
 	for {
-		fmt.Println("Running Update Weather per 15 Second")
 		rand.Seed(time.Now().UnixNano())
 		statusWeather := StatusWeather{}
 		statusWeather.Status.Water = rand.Intn(max-min) + min
@@ -39,7 +38,7 @@ func UpdateWeather() {
 			fmt.Println(err)
 		}
 
-		errs := ioutil.WriteFile("data.json", dataWeather, 0644)
+		errs := ioutil.WriteFile("cuaca.json", dataWeather, 0644)
 		if errs != nil {
 			fmt.Println(errs)
 		}

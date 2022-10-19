@@ -21,7 +21,7 @@ func main() {
 }
 
 func dataCuaca(w http.ResponseWriter, r *http.Request) {
-	dataWeather, err := ioutil.ReadFile("data.json")
+	dataWeather, err := ioutil.ReadFile("cuaca.json")
 	if err != nil {
 		writeJsonResponse(w, http.StatusNotFound, map[string]interface{}{
 			"error": err.Error(),
@@ -38,32 +38,32 @@ func dataCuaca(w http.ResponseWriter, r *http.Request) {
 	}
 	water := statusWeather.Status.Water
 	wind := statusWeather.Status.Wind
-	var statusWater string
-	var statusWind string
+	var status_water string
+	var status_wind string
 
 	//check water level
 	if water <= 5 {
-		statusWater = "Aman"
+		status_water = "Aman"
 	} else if water >= 6 && water <= 8 {
-		statusWater = "Siaga"
+		status_water = "Siaga"
 	} else {
-		statusWater = "Bahaya"
+		status_water = "Bahaya"
 	}
 
 	//check wind level
 	if wind <= 6 {
-		statusWind = "Aman"
+		status_wind = "Aman"
 	} else if wind >= 7 && wind <= 15 {
-		statusWind = "Siaga"
+		status_wind = "Siaga"
 	} else {
-		statusWind = "Bahaya"
+		status_wind = "Bahaya"
 	}
 
 	resultWeather := services.ResultWeather{}
 	resultWeather.Water = water
 	resultWeather.Wind = wind
-	resultWeather.StatusWater = statusWater
-	resultWeather.StatusWind = statusWind
+	resultWeather.status_water = status_water
+	resultWeather.status_wind = status_wind
 
 	tpl, errTmpl := template.ParseFiles("static/index.html")
 	if errTmpl != nil {
